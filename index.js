@@ -9,10 +9,6 @@ app.get("/", function(req, res){
   res.send("<p>99 bottles of beer on the wall</p><a href=\"/98\"> take one down, pass it around... </a>");
 });
 
-app.get("/0", function(req, res){
-  res.send("<p>"+req.params.num+" bottles of beer on the wall. Party\'s Over.</p><a href=\"/\"> Start Over? </a>");
-});
-
 app.get("/:num", function(req, res){
   if (isNaN(req.params.num) === false){
   if (parseInt(req.params.num) === 99){
@@ -20,6 +16,9 @@ app.get("/:num", function(req, res){
   }
   else if (parseInt(req.params.num) === 98){
     res.send("<p>"+req.params.num+" bottles of beer on the wall</p><a href=\"/"+(req.params.num-1)+"\"> take one down, pass it around... </a> <br> <a href=\"/\"> take that bottle back, put it back up... </a>");
+  }
+  else if (parseInt(req.params.num) === 0){
+    res.send("<p>"+req.params.num+" bottles of beer on the wall. Party\'s Over.</p><a href=\"/\"> Start Over? </a>");
   }
   else if (parseInt(req.params.num) > 99){
     res.send("<p>"+req.params.num+" bottles of beer?? You can't have that many!! What parties are you having?!</p><a href=\"/\"> Go back to 99 Bottles Start... </a>");
